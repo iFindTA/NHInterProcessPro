@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<style type="text/css">
+		html {
+			font-size: calc(100vw/7.5);
+		}
+		html, body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+		}
+		a, input, textarea, button {
+			outline: none;
+			hidefocus: true;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+		}
+		a {
+			text-decoration: none;
+		}
+		*,
+		*:after,
+		*:before {
+			box-sizing: border-box;
+		}
+		.loading {
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			margin-left: -1.8rem;
+			margin-top: -0.9rem;
+			width: 3.6rem;
+			height: 1.8rem;
+			background: rgba(0,0,0,.85);
+			border-radius: 3px;
+			padding: 0.57rem 0.2rem 0 0.2rem;
+			text-align: center;
+		}
+		.title {
+			color: #fff;
+			font-size: 0.24rem;
+			margin-bottom: 0.3rem;
+			line-height: 0.38rem;
+		}
+		.gif {
+			background: url(gif.gif) no-repeat 0 0;
+			background-size: 100%;
+			width: 2.2rem;
+			height: 0.06rem;
+			margin: 0 auto;
+		}
+		.confirm {
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			margin-left: -2.7rem;
+			margin-top: -1.4rem;
+			width: 5.4rem;
+			height: 3rem;
+			border-radius: 3px;
+			padding: 0.34rem;
+			padding-bottom: 0;
+			font-size: 0.30rem;
+			background: #fff;
+			border: 1px solid #ddd;
+			text-align: justify;
+			line-height: 0.42rem;
+            z-index: 2;
+		}
+		.confirm .button {
+			position: absolute;
+			display: block;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 0.8rem;
+			line-height: 0.8rem;
+			text-align: center;
+			border-top: 1px solid #ddd;
+			font-size: 0.30rem;
+			color: #607ee0;
+            
+		}
+    .confirm .tiper {
+        color: #888;
+    }
+    .confirm b {
+        color:#555;
+    }
+    .layer {
+        position: fixed;
+        left: 0;
+        right:0;
+        top:0;
+        bottom:0;
+        background:rgba(0,0,0,.6);
+        z-index: 0;
+    }
+	</style>
+</head>
+<body>
+	<div class="loading" id="loading">
+		<div class="title">正在跳转到<span id="platName">就爱赚钱钱你咬我</span></div>
+		<div class="gif"></div>
+	</div>
+    <div class="layer" style="display:none;" id="layer"></div>
+	<div class="confirm" id="confirm" style="display: none;">
+		<div class="tiper">您未安装该平台的应用，请在 <b>安装完成后返回爱财帮</b> 重新点击底部按钮参与活动。点击确定跳转到App Store安装</div>
+        
+		<a class="button" href="#abc">确定</a>
+	</div>
+	<script type="text/javascript">
+		var calcTest = function () {
+    		var el = document.createElement('div');
+			el.style.cssText = 'width: -moz-calc(10px); width: -webkit-calc(10px); width: calc(10px)';
+			return !!el.style.length;
+    	}
+    	var safari9 = function () {
+    		var version = 0
+    		try {
+    			version = parseInt(navigator.userAgent.match(/Version\/([^\s]*)(\s)/)[1])
+    		} catch (err) {}
+    		if (version < 9) return false
+    		return true
+    	}
+    	var isQQX5 = function () {
+    		return !!~navigator.userAgent.indexOf('MQQBrowser')
+    	}
+    	var isIphone = function () {
+    		return  /iPhone|iPad|Mac/.test(navigator.userAgent)
+    	}
+    	var inWeixin = function () {
+    		return !!~navigator.userAgent.indexOf("MicroMessenger")
+    	}
+    	var isSafari = function () {
+    		return !!~navigator.userAgent.toLowerCase().indexOf('safari')
+    	}
+    	// alert(navigator.userAgent)
+    	var query = function (name) {
+    		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"),
+    			search = decodeURI(window.location.search);
+		    var r = search.substr(1).match(reg);
+		    if(r!=null)return  unescape(r[2]); return null; 
+    	}
+    	if (!calcTest() || isQQX5() || !safari9()) {
+    		var fs = window.document.documentElement.clientWidth / 7.5 + 'px'
+    		document.documentElement.style.fontSize = window.document.documentElement.clientWidth / 7.5 + 'px'	
+    	}
+    	var p = document.getElementById('platName');
+    	p.innerText = query('plat') || '未知平台';
+
+    	function redirect() {
+    		window.location.href = window.appUrl;
+    	}
+
+
+
+//@"document.getElementById('platName').innerText ='%@';window.appUrl='%@';setTimeout(function() {document.getElementById('loading').style.display = 'none';document.getElementById('confirm').style.display = 'block';}, 25);window.location.href = \"%@://%@\";"
+	</script>
+</body>
+</html>
